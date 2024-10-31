@@ -21,7 +21,7 @@ wss.on("connection",function(ws){
     ws.on("message",function(data){
         console.log(data.toString()+"b");
         wss.clients.forEach(function each(client){
-            client.send(data.toString+"b");
+            client.send(data.toString()+"b");
         });
     });
 });

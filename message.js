@@ -1,8 +1,8 @@
 const socket=new WebSocket("ws://localhost:80");
 const appellation=document.cookie.substring(5,document.cookie.length);
 socket.onmessage=function(event){
-    let type=event.data;
-    console.log(type.toString());
+    let type=event.data.toString();
+    console.log(type);
     if(type[type.length-1]=="a"){
         document.getElementById("num").innerText=type.substring(0,type.length-1);
     }
@@ -11,7 +11,7 @@ socket.onmessage=function(event){
         let sep=line.split("^$%&#!)*;'`~(>?<:@");
         let sentence=sep[0];
         let call=sep[1];
-        document.getElementById("board").innerHTML+="<div class='personalzone'><span class='name'>"+call+"</span><br><div class='message'>"+sentence+"</div></div>";
+        document.getElementById("board").innerHTML+="<div class='personalzone'><br><br><span class='name'>"+call+"</span><br><div class='message'>"+sentence+"</div></div>";
     }
 }
 function send(){
