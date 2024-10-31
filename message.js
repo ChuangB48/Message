@@ -12,7 +12,7 @@ socket.onmessage=function(event){
         let sep=line.split("^$%&#!)*;'`~(>?<:@");
         let sentence=sep[0];
         let call=sep[1];
-        document.getElementById("board").innerHTML+="<div class='personalzone'><span class='name'>"+call+"</span><br><div class='message'>"+sentence+"</div><br><br></div>";
+        document.getElementById("board").innerHTML+="<div class='personalzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
         if(paragraph==line.trim()){
             down();
             paragraph="";
