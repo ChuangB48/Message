@@ -5,6 +5,27 @@
             Message
         </title>
         <style>
+            body{
+                overflow: hidden;
+            }
+            #fireboard{
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                top: 0px;
+                left: 0px;
+                display: flex;
+                text-align: center;
+                align-items: center;
+            }
+            #firework{
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+            }
             #title{
                 position: absolute;
                 top: 2vh;
@@ -147,6 +168,9 @@
         </style>
     </head>
     <body bgcolor="gray">
+        <div id="fireboard">
+            <img src="firework.png" id="firework">
+        </div>
         <span id="title">
             Message(Online:&nbsp;<span id="num"></span>&nbsp;people)
         </span>
