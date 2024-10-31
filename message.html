@@ -11,6 +11,19 @@
                 left: 5vw;
                 font-size: 10vh;
             }
+            #personal{
+                position: absolute;
+                width: 30vw;
+                height: 12vh;
+                top: 2vh;
+                left: 65vw;
+                border: 1px #FDD6CE solid;
+                border-radius: 6vh;
+                text-align: center;
+            }
+            #username{
+                font-size: 10vh;
+            }
             #board{
                 position: absolute;
                 border: 1px #FDD6CE solid;
@@ -109,6 +122,7 @@
         <span id="title">
             Message(Online:&nbsp;<span id="num"></span>&nbsp;people)
         </span>
+        <div id="personal"></div>
         <div id="board"></div>
         <input type="text" id="type">
         <div id="send" onclick="javascript: send()">

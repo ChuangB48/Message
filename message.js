@@ -1,5 +1,6 @@
 const socket=new WebSocket("ws://localhost:80");
 const appellation=document.cookie.substring(5,document.cookie.length);
+document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
 socket.onmessage=function(event){
     let type=event.data.toString();
     console.log(type);
