@@ -5,6 +5,23 @@
             Login
         </title>
         <style>
+            #fireboard{
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                top: 0px;
+                left: 0px;
+            }
+            #firework{
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                top: 50%;
+                left: 50%;
+                transform: translateY(-50%);
+                transform: translateX(-50%);
+                opacity: 0;
+            }
             #login{
                 position: fixed;
                 border: 1px #FDD6CE solid;
@@ -90,6 +107,9 @@
         </style>
     </head>
     <body bgcolor="gray">
+        <div id="fireboard">
+            <img src="firework.png" id="firework">
+        </div>
         <div id="login">
             <br><br><br><br>
             <span id="caption">
