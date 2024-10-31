@@ -1,4 +1,4 @@
-const socket=new WebSocket("ws://localhost:80");
+const socket=new WebSocket("wss://message-axxe.onrender.com");
 const appellation=document.cookie.substring(5,document.cookie.length);
 document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
 socket.onmessage=function(event){
