@@ -8,6 +8,7 @@ const wss=new WebSocket({server});
 let turnout=0;
 wss.on("connection",function(ws){
     turnout++;
+    console.log("hi");
     wss.clients.forEach(function each(client){
         client.send(turnout.toString()+"a");
     });
@@ -18,6 +19,7 @@ wss.on("connection",function(ws){
         });
     });
     ws.on("message",function(data){
+        console.log(data.toString()+"b");
         wss.clients.forEach(function each(client){
             client.send(data.toString+"b");
         });
