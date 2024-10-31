@@ -18,8 +18,10 @@ wss.on("connection",function(ws){
         });
     });
     ws.on("message",function(data){
+        data=data.toString();
+        data=" "+data;
         wss.clients.forEach(function each(client){
-            client.send(data.toString()+"b");
+            client.send(data+"b");
         });
     });
 });
