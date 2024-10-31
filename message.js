@@ -14,12 +14,17 @@ socket.onmessage=function(event){
         document.getElementById("board").innerHTML+="<div class='personalzone'><span class='name'>"+call+"</span><br><div class='message'>"+sentence+"</div><br><br></div>";
     }
 }
+function down(){
+    let i=document.getElementById("board");
+    i.scrollTo(0,i.scrollHeight);
+}
 function send(){
     let type=document.getElementById("type");
     if(type.value.trim()!=""){
         let message=type.value+"^$%&#!)*;'`~(>?<:@"+appellation;
         socket.send(message);
         type.value="";
+        down();
     }
 }
 window.addEventListener("keypress",function(press){

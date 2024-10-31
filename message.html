@@ -32,7 +32,24 @@
                 top: 15vh;
                 left: 5vw;
                 border-radius: 10px;
+                overflow-x: hidden;
+                overflow-y: scroll;
                 word-wrap: break-word;
+            }
+            #pgdn{
+                position: absolute;
+                border: 1px #FDD6CE solid;
+                width: 5vw;
+                height: 5vh;
+                top: 80vh;
+                left: 90vw;
+                border-radius: 10px;
+                overflow: hidden;
+                text-align: center;
+            }
+            #down{
+                width: 3vw;
+                height: 5vh;
             }
             #type{
                 position: absolute;
@@ -116,6 +133,9 @@
                 border: 1px #fdd6ce5b solid;
                 border-radius: 10px;
             }
+            ::-webkit-scrollbar{
+                display: none;
+            }
         </style>
     </head>
     <body bgcolor="gray">
@@ -124,6 +144,9 @@
         </span>
         <div id="personal"></div>
         <div id="board"></div>
+        <div id="pgdn" onclick="javascript: down()">
+            <img src="down.png" id="down">
+        </div>
         <input type="text" id="type">
         <div id="send" onclick="javascript: send()">
             send
