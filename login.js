@@ -24,7 +24,7 @@ window.addEventListener("click",function(mouse){
         if(o<=0){
             window.clearInterval(time);
         }
-    },10);
+    },1);
     document.getElementById("firework").style.opacity="0";
     document.getElementById("firework").style.width="5px";
     document.getElementById("firework").style.height="5px";
