@@ -1,4 +1,4 @@
-const socket=new WebSocket("wss://localhost:80");
+const socket=new WebSocket("ws://localhost:80");
 const name=document.cookie.substring(5,document.cookie.length);
 socket.onmessage=function(data){
     if(data[data.length-1]=="a"){
