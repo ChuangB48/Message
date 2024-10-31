@@ -3,7 +3,6 @@ const appellation=document.cookie.substring(5,document.cookie.length);
 document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
 socket.onmessage=function(event){
     let type=event.data.toString();
-    console.log(type);
     if(type[type.length-1]=="a"){
         document.getElementById("num").innerText=type.substring(0,type.length-1);
     }
