@@ -2,6 +2,10 @@ const socket=new WebSocket("wss://message-axxe.onrender.com");
 const appellation=document.cookie.substring(5,document.cookie.length);
 let paragraph="";
 document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
+function down(){
+    let i=document.getElementById("board");
+    i.scrollTo(0,i.scrollHeight);
+}
 socket.onmessage=function(event){
     let type=event.data.toString();
     if(type[type.length-1]=="a"){
@@ -18,11 +22,14 @@ socket.onmessage=function(event){
             down();
             paragraph="";
         }
+        else{
+            let i=document.getElementById("board");
+            let h=i.scrollHeight;
+            if(i.scrollTop+h>=i.scrollHeight){
+                down();
+            }
+        }
     }
-}
-function down(){
-    let i=document.getElementById("board");
-    i.scrollTo(0,i.scrollHeight);
 }
 function send(){
     let type=document.getElementById("type");
