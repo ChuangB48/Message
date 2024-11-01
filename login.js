@@ -1,7 +1,24 @@
 function start(){
     const name=document.getElementById("username");
     if(name.value.trim()==""){
-        alert("Username can't be empty!");
+        let o=0;
+        let time=window.setInterval(function(){
+            document.getElementById("empty").style.opacity=o.toString();
+            o+=0.01;
+            if(o>=1){
+                window.clearInterval(time);
+            }
+        },1);
+        window.setTimeout(function(){
+            o=1;
+            let time=window.setInterval(function(){
+                document.getElementById("empty").style.opacity=o.toString();
+                o-=0.01;
+                if(o<=0){
+                    window.clearInterval(time);
+                }
+            },1);
+        },2000);
     }
     else{
         document.cookie="name="+name.value.trim();

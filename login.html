@@ -30,6 +30,22 @@
                 transform: translateX(-50%);
                 opacity: 0;
             }
+            #empty{
+                position: absolute;
+                outline: 1px solid;
+                outline-color: #fabcaf;
+                top: 0px;
+                left: 0px;
+                background-color: #fabcaf;
+                width: 100vw;
+                height: 15vh;
+                text-align: center;
+                opacity: 0;
+            }
+            #alert{
+                color: red !important;
+                font-size: 10vh;
+            }
             #login{
                 position: fixed;
                 border: 1px #632A7E solid;
@@ -121,6 +137,11 @@
     <body bgcolor="#EBE5D9">
         <div id="fireboard">
             <img src="firework.png" id="firework">
+        </div>
+        <div id="empty">
+            <span id="alert">
+                Username can't be empty!
+            </span>
         </div>
         <div id="login">
             <br><br><br><br>
