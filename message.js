@@ -17,7 +17,12 @@ socket.onmessage=function(event){
         let sentence=sep[0];
         let call=sep[1];
         sentence="&ensp;"+sentence+"&ensp;";
-        document.getElementById("board").innerHTML+="<div class='personalzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+        if(paragraph==line){
+            document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+        }
+        else{
+            document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+        }
         if(paragraph==line){
             down();
             paragraph="";

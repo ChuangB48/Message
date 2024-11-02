@@ -144,20 +144,40 @@
                 text-align: center;
                 box-shadow: 0px 0px 15px 1px #632A7E inset;
             }
-            .personalzone{
+            .myzone{
                 width: 90vw;
                 height: auto;
                 word-wrap: break-word;
+                text-align: right;
+            }
+            .otherzone{
+                width: 90vw;
+                height: auto;
+                word-wrap: break-word;
+                text-align: left;
             }
             .name{
                 color: #4BD0D0;
                 font-size: 2vw;
             }
-            .message{
+            .myzone .message{
+                position: absolute;
+                top: auto;
+                right: 0px;
                 width: fit-content;
                 height: fit-content;
                 max-width: 70vw;
-                border: 1px #632a7e6b solid;
+                border: 1px #ff00a66b solid;
+                border-radius: 20px;
+            }
+            .otherzone .message{
+                position: absolute;
+                top: auto;
+                left: 0px;
+                width: fit-content;
+                height: fit-content;
+                max-width: 70vw;
+                border: 1px #009dff6b solid;
                 border-radius: 20px;
             }
             .words{
