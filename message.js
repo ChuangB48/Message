@@ -16,7 +16,7 @@ socket.onmessage=function(event){
         document.getElementById("num").innerText=word.content.toString();
     }
     else if(word.type=="text"){
-        let sentence="&ensp;"+word.content+"&ensp;";
+        let sentence=word.content;
         let call=word.name;
         if(self&&confirmname==word.name&&confirmcontent==word.content){
             document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
