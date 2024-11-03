@@ -19,7 +19,7 @@ socket.onmessage=function(event){
         let sentence=word.content;
         let call=word.name;
         if(self&&confirmname==word.name&&confirmcontent==word.content){
-            document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+            document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br></div>";
             down();
             confirmself=false;
             confirmname="";
