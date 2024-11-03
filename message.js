@@ -1,8 +1,9 @@
 const socket=new WebSocket("wss://message-axxe.onrender.com");
 const appellation=document.cookie.substring(5,document.cookie.length);
 let typefocus=false;
-let paragraph="";
-let id=0;
+let confirmself=false;
+let confirmname="";
+let confirmcontent="";
 document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
 function down(){
     let i=document.getElementById("board");
@@ -15,21 +16,17 @@ socket.onmessage=function(event){
         document.getElementById("num").innerText=word.content.toString();
     }
     else if(word.type=="text"){
-        let line=word.ID;
-        let sentence=word.content;
+        let sentence="&ensp;"+word.content+"&ensp;";
         let call=word.name;
-        sentence="&ensp;"+sentence+"&ensp;";
-        if(paragraph==line){
+        if(self&&confirmname==word.name&&confirmcontent==word.content){
             document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+            down();
+            confirmself=false;
+            confirmname="";
+            confirmcontent="";
         }
         else{
             document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
-        }
-        if(paragraph==line){
-            down();
-            paragraph="";
-        }
-        else{
             let i=document.getElementById("board");
             let h=i.scrollHeight;
             if(i.scrollTop+h>=i.scrollHeight){
@@ -44,12 +41,12 @@ function send(){
         let message={
             "type":"text",
             "name":appellation,
-            "content":type.value,
-            "ID":id
+            "content":type.value
         };
         socket.send(JSON.stringify(message));
-        id++;
-        paragraph=message.ID;
+        confirmself=true;
+        confirmname=message.name;
+        confirmcontent=message.content;
         type.value="";
     }
 }
