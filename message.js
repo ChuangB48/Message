@@ -2,21 +2,22 @@ const socket=new WebSocket("wss://message-axxe.onrender.com");
 const appellation=document.cookie.substring(5,document.cookie.length);
 let typefocus=false;
 let paragraph="";
+let id=0;
 document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
 function down(){
     let i=document.getElementById("board");
     i.scrollTo(0,i.scrollHeight);
 }
 socket.onmessage=function(event){
-    let type=event.data.toString();
-    if(type[type.length-1]=="a"){
-        document.getElementById("num").innerText=type.substring(0,type.length-1);
+    let word=event.data.toString();
+    word=JSON.parse(word);
+    if(word.type=="num"){
+        document.getElementById("num").innerText=word.content.toString();
     }
-    else if(type[type.length-1]=="b"){
-        let line=type.substring(0,type.length-1);
-        let sep=line.split("^$%&#!)*;'`~(>?<:@");
-        let sentence=sep[0];
-        let call=sep[1];
+    else if(word.type=="text"){
+        let line=word.ID;
+        let sentence=word.content;
+        let call=word.name;
         sentence="&ensp;"+sentence+"&ensp;";
         if(paragraph==line){
             document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
@@ -40,9 +41,15 @@ socket.onmessage=function(event){
 function send(){
     let type=document.getElementById("type");
     if(type.value.trim()!=""){
-        let message=type.value+"^$%&#!)*;'`~(>?<:@"+appellation;
-        socket.send(message);
-        paragraph=message;
+        let message={
+            "type":"text",
+            "name":appellation,
+            "content":type.value,
+            "ID":id
+        };
+        socket.send(JSON.stringify(message));
+        id++;
+        paragraph=message.ID;
         type.value="";
     }
 }

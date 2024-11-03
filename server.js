@@ -9,12 +9,12 @@ let turnout=0;
 wss.on("connection",function(ws){
     turnout++;
     wss.clients.forEach(function each(client){
-        client.send(turnout.toString()+"a");
+        client.send(JSON.stringify({"type":"num","name":"none","content":turnout,"ID":"none"}));
     });
     ws.on("close",function(){
         turnout--;
         wss.clients.forEach(function each(client){
-            client.send(turnout.toString()+"a");
+            client.send(JSON.stringify({"type":"num","name":"none","content":turnout,"ID":"none"}));
         });
     });
     ws.on("message",function(data){
