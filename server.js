@@ -20,7 +20,7 @@ wss.on("connection",function(ws){
     ws.on("message",function(data){
         data=data.toString();
         wss.clients.forEach(function each(client){
-            client.send(data+"b");
+            client.send(data);
         });
     });
 });
