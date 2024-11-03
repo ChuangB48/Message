@@ -38,11 +38,20 @@ body{
 #username{
     font-size: 10vh;
 }
-#board{
+#visibleboard{
     position: absolute;
     border: 1px #632A7E solid;
     width: 90vw;
     height: 70vh;
+    top: 15vh;
+    left: 5vw;
+    border-radius: 10px;
+}
+#board{
+    position: absolute;
+    border: transparent;
+    width: 90vw;
+    height: 65vh;
     top: 15vh;
     left: 5vw;
     border-radius: 10px;
