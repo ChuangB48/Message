@@ -46,3 +46,8 @@ window.addEventListener("click",function(mouse){
     document.getElementById("firework").style.width="5px";
     document.getElementById("firework").style.height="5px";
 });
+window.addEventListener("keypress",function(press){
+    if(press.key=="Enter"){
+        start();
+    }
+},false);
