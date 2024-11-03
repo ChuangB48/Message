@@ -27,7 +27,7 @@ body{
 }
 #personal{
     position: absolute;
-    width: 25vw;
+    width: fit-content;
     height: 12vh;
     top: 2vh;
     left: 70vw;
