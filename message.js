@@ -1,5 +1,6 @@
 const socket=new WebSocket("wss://message-axxe.onrender.com");
 const appellation=document.cookie.substring(5,document.cookie.length);
+let typefocus=false;
 let paragraph="";
 document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
 function down(){
@@ -71,3 +72,24 @@ window.addEventListener("click",function(mouse){
     document.getElementById("firework").style.width="5px";
     document.getElementById("firework").style.height="5px";
 });
+document.getElementById("type").addEventListener("focus",function(){
+    typefocus=true;
+    color();
+});
+document.getElementById("type").addEventListener("blur",function(){
+    typefocus=false;
+});
+function color(){
+    let h=0;
+    let focustime=window.setInterval(function(){
+        h++;
+        if(h>=355){
+            h=0;
+        }
+        document.getElementById("type").style.border="1px hsl("+h.toString()+",100%,50%) solid";
+        if(!typefocus){
+            document.getElementById("type").style.border="1px #632A7E solid";
+            window.clearInterval(focustime);
+        }
+    },2);
+}
