@@ -26,7 +26,7 @@ socket.onmessage=function(event){
             confirmcontent="";
         }
         else{
-            document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+            document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br></div>";
             let i=document.getElementById("board");
             let h=i.scrollHeight;
             if(i.scrollTop+h>=i.scrollHeight){

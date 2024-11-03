@@ -157,7 +157,7 @@ body{
 .myzone .message{
     position: relative;
     top: auto;
-    right: 0px;
+    float: right;
     width: fit-content;
     height: fit-content;
     max-width: 70vw;
@@ -167,7 +167,7 @@ body{
 .otherzone .message{
     position: relative;
     top: auto;
-    left: 0px;
+    float: left;
     width: fit-content;
     height: fit-content;
     max-width: 70vw;
