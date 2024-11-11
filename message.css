@@ -122,7 +122,7 @@ body:hover{
     outline-color: transparent;
     outline-offset: 15px;
     text-align: center;
-    box-shadow: 0px 0px 15px 1px #632A7E inset;
+    box-shadow: 0px 0px 5px 0px #632A7E inset;
 }
 #send:active{
     position: absolute;
