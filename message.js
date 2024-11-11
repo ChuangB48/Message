@@ -16,7 +16,7 @@ socket.onmessage=event=>{
             document.getElementById("num").innerText=word.content.toString()+" person";
         }
         else{
-            document.getElementById("num").innerText=word.content.toString()+"people";
+            document.getElementById("num").innerText=word.content.toString()+" people";
         }
     }
     else if(word.type=="text"){
