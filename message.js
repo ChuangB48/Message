@@ -12,7 +12,12 @@ socket.onmessage=event=>{
     let word=event.data.toString();
     word=JSON.parse(word);
     if(word.type=="num"){
-        document.getElementById("num").innerText=word.content.toString();
+        if(word.content=="1"){
+            document.getElementById("num").innerText=word.content.toString()+" person";
+        }
+        else{
+            document.getElementById("num").innerText=word.content.toString()+"people";
+        }
     }
     else if(word.type=="text"){
         let sentence=word.content;
