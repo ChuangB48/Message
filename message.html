@@ -23,6 +23,32 @@
         <div id="send" onclick="javascript: send()">
             send
         </div>
+        <div id="detector">
+            <div id="photoboard">
+                <img src="photo.png" id="photosurface">
+                <span id="photospan">photo</span>
+                <input type="file" id="photo" accept="image/*" onchange="javascript: light()">
+            </div>
+            <div id="videoboard">
+                <img src="video.png" id="videosurface">
+                <span id="videospan">video</span>
+                <input type="file" id="video" accept="video/*" onchange="javascript: light()">
+            </div>
+            <div id="fileboard">
+                <img src="file.png" id="filesurface">
+                <span id="filespan">file</span>
+                <input type="file" id="file" onchange="javascript: ligth()">
+            </div>
+            <div id="deletboard" onclick="javascript: delet()">
+                <img src="delet.png" id="deletsurface">
+                <span id="deletspan">delet</span>
+            </div>
+            <div id="other">
+                <span id="add">
+                    +
+                </span>
+            </div>
+        </div>
     </body>
     <script src="message.js"></script>
 </html>

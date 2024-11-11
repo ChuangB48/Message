@@ -2,16 +2,16 @@ function start(){
     const name=document.getElementById("username");
     if(name.value.trim()==""){
         let o=0;
-        let time=window.setInterval(function(){
+        let time=window.setInterval(()=>{
             document.getElementById("empty").style.opacity=o.toString();
             o+=0.01;
             if(o>=1){
                 window.clearInterval(time);
             }
         },1);
-        window.setTimeout(function(){
+        window.setTimeout(()=>{
             o=1;
-            let time=window.setInterval(function(){
+            let time=window.setInterval(()=>{
                 document.getElementById("empty").style.opacity=o.toString();
                 o-=0.01;
                 if(o<=0){
@@ -25,14 +25,14 @@ function start(){
         location.href="message.html";
     }
 }
-window.addEventListener("click",function(mouse){
+window.addEventListener("click",mouse=>{
     let mousey=mouse.clientX-25;
     let mousex=mouse.clientY-25;
     document.getElementById("fireboard").style.top=mousex.toString()+"px";
     document.getElementById("fireboard").style.left=mousey.toString()+"px";
     document.getElementById("firework").style.opacity="1";
     let o=1.0,s=5.0;
-    let time=window.setInterval(function(){
+    let time=window.setInterval(()=>{
         document.getElementById("firework").style.opacity=o.toString();
         document.getElementById("firework").style.width=s.toString()+"px";
         document.getElementById("firework").style.height=s.toString()+"px";
@@ -46,7 +46,7 @@ window.addEventListener("click",function(mouse){
     document.getElementById("firework").style.width="5px";
     document.getElementById("firework").style.height="5px";
 });
-window.addEventListener("keypress",function(press){
+window.addEventListener("keypress",press=>{
     if(press.key=="Enter"){
         start();
     }
