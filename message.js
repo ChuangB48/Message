@@ -55,6 +55,31 @@ socket.onmessage=event=>{
             }
         }
     }
+    else if(word.type=="video"){
+        let src="";
+        if(word.finish=="false"){
+            src+=word.content;
+        }
+        else if(word.finish=="true"){
+            console.log("finish");
+            src+=word.content;
+            let call=word.name;
+            if(confirmname==word.name&&confirmcontent==word.content){
+                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><video id='control' controls><source type='video/mp4' src='"+src+"' id='video'></video><br><br></div><br><br></div>";
+                down();
+                confirmname="";
+                confirmcontent="";
+            }
+            else{
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><video id='control' controls><source type='video/mp4' src='"+src+"' id='video'></video><br><br></div><br><br></div>";
+                let i=document.getElementById("board");
+                let h=i.scrollHeight;
+                if(i.scrollTop+h>=i.scrollHeight){
+                    down();
+                }
+            }
+        }
+    }
 }
 function send(){
     let type=document.getElementById("type");
@@ -63,7 +88,45 @@ function send(){
     let file=document.getElementById("file");
     if(type.value.trim()!=""||photo.value!=""||video.value!=""||file.value!=""){
         if(video.value!=""){
-            video.value="";
+            let reader=new FileReader();
+            let videos=new ArrayBuffer();
+            reader.onload=e=>{
+                videos=e.target.result;
+                let len=videos.length;
+                let message={};
+                for(let a=0;a<len+100000;a+=100000){
+                    if(a<len){
+                        message={
+                            "type":"video",
+                            "name":appellation,
+                            "finish":"false",
+                            "content":videos.substring(a,a+100000)
+                        };
+                    }
+                    else if(a==len){
+                        message={
+                            "type":"video",
+                            "name":appellation,
+                            "finish":"true",
+                            "content":videos.substring(a,a+100000)
+                        };
+                    }
+                    else if(a>len){
+                        message={
+                            "type":"video",
+                            "name":appellation,
+                            "finish":"true",
+                            "content":videos.substring(a,len)
+                        };
+                    }
+                    console.log(message.content,a);
+                    socket.send(JSON.stringify(message));
+                }
+                confirmname=message.name;
+                confirmcontent=message.content;
+                video.value="";
+            };
+            reader.readAsDataURL(video.files[0]);
         }
         if(file.value!=""){
             file.value="";
