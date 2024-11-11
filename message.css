@@ -1,6 +1,9 @@
 body{
     overflow: hidden;
 }
+body:hover{
+    cursor: default;
+}
 #fireboard{
     position: absolute;
     width: 50px;

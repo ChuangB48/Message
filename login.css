@@ -2,6 +2,9 @@ body{
     overflow: hidden;
     background-size: cover;
 }
+body:hover{
+    cursor: default;
+}
 span{
     color: #632A7E;
 }

@@ -105,7 +105,6 @@ function delet(){
     photo.value="";
     video.value="";
     file.value="";
-    light();
 }
 window.addEventListener("keypress",press=>{
     if(press.key=="Enter"){
