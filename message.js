@@ -1,6 +1,9 @@
 const socket=new WebSocket("wss://message-axxe.onrender.com");
 const appellation=document.cookie.substring(5,document.cookie.length);
 let typefocus=false;
+let photosrc="";
+let videosrc="";
+let filesrc="";
 let confirmname="";
 let confirmcontent="";
 document.getElementById("personal").innerHTML="<span id='username'>"+appellation+"</span>";
@@ -38,46 +41,51 @@ socket.onmessage=event=>{
         }
     }
     else if(word.type=="photo"){
-        let src=word.content;
-        let call=word.name;
-        if(confirmname==word.name&&confirmcontent==word.content){
-            document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+src+"' class='photo'><br><br></div><br><br></div>";
-            down();
-            confirmname="";
-            confirmcontent="";
-        }
-        else{
-            document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+src+"' class='photo'><br><br></div><br><br></div>";
-            let i=document.getElementById("board");
-            let h=i.scrollHeight;
-            if(i.scrollTop+h>=i.scrollHeight){
-                down();
-            }
-        }
-    }
-    else if(word.type=="video"){
-        let src="";
         if(word.finish=="false"){
-            src+=word.content;
+            photosrc+=word.content;
         }
         else if(word.finish=="true"){
-            console.log("finish");
-            src+=word.content;
+            photosrc+=word.content;
             let call=word.name;
             if(confirmname==word.name&&confirmcontent==word.content){
-                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><video id='control' controls><source type='video/mp4' src='"+src+"' id='video'></video><br><br></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+photosrc+"' class='photo'><br><br></div><br><br></div>";
                 down();
                 confirmname="";
                 confirmcontent="";
             }
             else{
-                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><video id='control' controls><source type='video/mp4' src='"+src+"' id='video'></video><br><br></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+photosrc+"' class='photo'><br><br></div><br><br></div>";
                 let i=document.getElementById("board");
                 let h=i.scrollHeight;
                 if(i.scrollTop+h>=i.scrollHeight){
                     down();
                 }
             }
+            photosrc="";
+        }
+    }
+    else if(word.type=="video"){
+        if(word.finish=="false"){
+            videosrc+=word.content;
+        }
+        else if(word.finish=="true"){
+            videosrc+=word.content;
+            let call=word.name;
+            if(confirmname==word.name&&confirmcontent==word.content){
+                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><video class='control' controls><source src='"+videosrc+"' class='video'></video><br><br></div><br><br></div>";
+                down();
+                confirmname="";
+                confirmcontent="";
+            }
+            else{
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><video class='control' controls><source src='"+videosrc+"' class='video'></video><br><br></div><br><br></div>";
+                let i=document.getElementById("board");
+                let h=i.scrollHeight;
+                if(i.scrollTop+h>=i.scrollHeight){
+                    down();
+                }
+            }
+            videosrc="";
         }
     }
 }
@@ -94,13 +102,13 @@ function send(){
                 videos=e.target.result;
                 let len=videos.length;
                 let message={};
-                for(let a=0;a<len+100000;a+=100000){
+                for(let a=0;a<len+10000;a+=10000){
                     if(a<len){
                         message={
                             "type":"video",
                             "name":appellation,
                             "finish":"false",
-                            "content":videos.substring(a,a+100000)
+                            "content":videos.substring(a,a+10000)
                         };
                     }
                     else if(a==len){
@@ -108,7 +116,7 @@ function send(){
                             "type":"video",
                             "name":appellation,
                             "finish":"true",
-                            "content":videos.substring(a,a+100000)
+                            "content":videos.substring(a,a+10000)
                         };
                     }
                     else if(a>len){
@@ -119,7 +127,6 @@ function send(){
                             "content":videos.substring(a,len)
                         };
                     }
-                    console.log(message.content,a);
                     socket.send(JSON.stringify(message));
                 }
                 confirmname=message.name;
@@ -136,12 +143,35 @@ function send(){
             let photos=new ArrayBuffer();
             reader.onload=e=>{
                 photos=e.target.result;
-                let message={
-                    "type":"photo",
-                    "name":appellation,
-                    "content":photos
-                };
-                socket.send(JSON.stringify(message));
+                let len=photos.length;
+                let message={};
+                for(let a=0;a<len+10000;a+=10000){
+                    if(a<len){
+                        message={
+                            "type":"photo",
+                            "name":appellation,
+                            "finish":"false",
+                            "content":photos.substring(a,a+10000)
+                        };
+                    }
+                    else if(a==len){
+                        message={
+                            "type":"photo",
+                            "name":appellation,
+                            "finish":"true",
+                            "content":photos.substring(a,a+10000)
+                        };
+                    }
+                    else if(a>len){
+                        message={
+                            "type":"photo",
+                            "name":appellation,
+                            "finish":"true",
+                            "content":photos.substring(a,len)
+                        };
+                    }
+                    socket.send(JSON.stringify(message));
+                }
                 confirmname=message.name;
                 confirmcontent=message.content;
                 photo.value="";

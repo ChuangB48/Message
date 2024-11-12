@@ -429,6 +429,10 @@ body:hover{
     max-width: 20vw;
     height: auto;
 }
+.control{
+    max-width: 20vw;
+    height: auto;
+}
 ::-webkit-scrollbar{
     display: none;
 }
