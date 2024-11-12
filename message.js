@@ -225,13 +225,6 @@ window.addEventListener("click",mouse=>{
     document.getElementById("firework").style.width="5px";
     document.getElementById("firework").style.height="5px";
 });
-document.getElementById("type").addEventListener("focus",()=>{
-    typefocus=true;
-    color();
-});
-document.getElementById("type").addEventListener("blur",()=>{
-    typefocus=false;
-});
 function color(){
     let h=0;
     let focustime=window.setInterval(()=>{
@@ -246,6 +239,13 @@ function color(){
         }
     },2);
 }
+document.getElementById("type").addEventListener("focus",()=>{
+    typefocus=true;
+    color();
+});
+document.getElementById("type").addEventListener("blur",()=>{
+    typefocus=false;
+});
 function light(){
     document.getElementById("type").focus();
 }
