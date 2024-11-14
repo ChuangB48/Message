@@ -12,6 +12,12 @@ function down(){
     i.scrollTo(0,i.scrollHeight);
 }
 socket.onmessage=event=>{
+    let time=new Date();
+    let year=time.getFullYear();
+    let month=time.getMonth();
+    let date=time.getDate();
+    let hour=time.getHours();
+    let minute=time.getMinutes();
     let word=event.data.toString();
     word=JSON.parse(word);
     if(word.type=="num"){
@@ -26,13 +32,13 @@ socket.onmessage=event=>{
         let sentence=word.content;
         let call=word.name;
         if(confirmname==word.name&&confirmcontent==word.content){
-            document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+            document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
             down();
             confirmname="";
             confirmcontent="";
         }
         else{
-            document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><br><br></div>";
+            document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><span class='words'>"+sentence+"</span></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
             let i=document.getElementById("board");
             let h=i.scrollHeight;
             if(i.scrollTop+h>=i.scrollHeight){
