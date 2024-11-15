@@ -54,13 +54,13 @@ socket.onmessage=event=>{
             photosrc+=word.content;
             let call=word.name;
             if(confirmname==word.name&&confirmcontent==word.content){
-                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+photosrc+"' class='photo'><br><br></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+photosrc+"' class='photo'><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div><br><br></div>";
                 down();
                 confirmname="";
                 confirmcontent="";
             }
             else{
-                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+photosrc+"' class='photo'><br><br></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+photosrc+"' class='photo'><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div><br><br></div>";
                 let i=document.getElementById("board");
                 let h=i.scrollHeight;
                 if(i.scrollTop+h>=i.scrollHeight){
@@ -78,13 +78,13 @@ socket.onmessage=event=>{
             videosrc+=word.content;
             let call=word.name;
             if(confirmname==word.name&&confirmcontent==word.content){
-                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><video class='control' controls><source src='"+videosrc+"' class='video'></video><br><br></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><video class='control' controls><source src='"+videosrc+"' class='video'></video><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div><br><br></div>";
                 down();
                 confirmname="";
                 confirmcontent="";
             }
             else{
-                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><video class='control' controls><source src='"+videosrc+"' class='video'></video><br><br></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><video class='control' controls><source src='"+videosrc+"' class='video'></video><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div><br><br></div>";
                 let i=document.getElementById("board");
                 let h=i.scrollHeight;
                 if(i.scrollTop+h>=i.scrollHeight){
