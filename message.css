@@ -39,7 +39,7 @@ body:hover{
     text-align: center;
 }
 #username{
-    font-size: 10vh;
+    font-size: 5vw;
 }
 #visibleboard{
     position: absolute;
@@ -159,6 +159,7 @@ body:hover{
     top: 25%;
     left: 10%;
     color: #fabcaf;
+    font-size: 1vw;
     opacity: 0;
     transition: all 300ms ease-in-out;
 }
@@ -194,6 +195,7 @@ body:hover{
     top: 25%;
     left: 10%;
     color: #fabcaf;
+    font-size: 1vw;
     opacity: 0;
     transition: all 300ms ease-in-out;
 }
@@ -229,6 +231,7 @@ body:hover{
     top: 25%;
     left: 25%;
     color: #fabcaf;
+    font-size: 1vw;
     opacity: 0;
     transition: all 300ms ease-in-out;
 }
@@ -259,6 +262,7 @@ body:hover{
     top: 25%;
     left: 10%;
     color: #fabcaf;
+    font-size: 1vw;
     opacity: 0;
     transition: all 300ms ease-in-out;
 }
@@ -337,7 +341,7 @@ body:hover{
 }
 .name{
     color: #4BD0D0;
-    font-size: 2vw;
+    font-size: 1.5vw;
 }
 .myzone .message{
     position: relative;
@@ -369,6 +373,12 @@ body:hover{
 .control{
     max-width: 20vw;
     height: auto;
+}
+.time{
+    position: relative;
+}
+.time span{
+    font-size: 1vw;
 }
 ::-webkit-scrollbar{
     display: none;
