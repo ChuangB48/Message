@@ -94,6 +94,30 @@ socket.onmessage=event=>{
             videosrc="";
         }
     }
+    else if(word.type=="file"){
+        if(word.finish=="false"){
+            filesrc+=word.content;
+        }
+        else if(word.finish=="true"){
+            filesrc+=word.content;
+            let call=word.name;
+            if(confirmname==word.name&&confirmcontent==word.content){
+                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><a href='"+filesrc+"' class='down' download><img src='download.png' class='download'></a></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
+                down();
+                confirmname="";
+                confirmcontent="";
+            }
+            else{
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><a href='"+filesrc+"' class='down' download><img src='download.png' class='download'></a></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
+                let i=document.getElementById("board");
+                let h=i.scrollHeight;
+                if(i.scrollTop+h>=i.scrollHeight){
+                    down();
+                }
+            }
+            filesrc="";
+        }
+    }
 }
 function send(){
     let type=document.getElementById("type");
@@ -103,10 +127,10 @@ function send(){
     if(type.value.trim()!=""||photo.value!=""||video.value!=""||file.value!=""){
         if(video.value!=""){
             let reader=new FileReader();
-            let videos=new ArrayBuffer();
+            let object=new ArrayBuffer();
             reader.onload=e=>{
-                videos=e.target.result;
-                let len=videos.length;
+                object=e.target.result;
+                let len=object.length;
                 let message={};
                 for(let a=0;a<len+10000;a+=10000){
                     if(a<len){
@@ -114,7 +138,7 @@ function send(){
                             "type":"video",
                             "name":appellation,
                             "finish":"false",
-                            "content":videos.substring(a,a+10000)
+                            "content":object.substring(a,a+10000)
                         };
                     }
                     else if(a==len){
@@ -122,7 +146,7 @@ function send(){
                             "type":"video",
                             "name":appellation,
                             "finish":"true",
-                            "content":videos.substring(a,a+10000)
+                            "content":object.substring(a,a+10000)
                         };
                     }
                     else if(a>len){
@@ -130,7 +154,7 @@ function send(){
                             "type":"video",
                             "name":appellation,
                             "finish":"true",
-                            "content":videos.substring(a,len)
+                            "content":object.substring(a,len)
                         };
                     }
                     socket.send(JSON.stringify(message));
@@ -142,14 +166,51 @@ function send(){
             reader.readAsDataURL(video.files[0]);
         }
         if(file.value!=""){
-            file.value="";
+            let reader=new FileReader();
+            let object=new ArrayBuffer();
+            reader.onload=e=>{
+                object=e.target.result;
+                let len=object.length;
+                let message={};
+                for(let a=0;a<len+10000;a+=10000){
+                    if(a<len){
+                        message={
+                            "type":"file",
+                            "name":appellation,
+                            "finish":"false",
+                            "content":object.substring(a,a+10000)
+                        };
+                    }
+                    else if(a==len){
+                        message={
+                            "type":"file",
+                            "name":appellation,
+                            "finish":"true",
+                            "content":object.substring(a,a+10000)
+                        };
+                    }
+                    else if(a>len){
+                        message={
+                            "type":"file",
+                            "name":appellation,
+                            "finish":"true",
+                            "content":object.substring(a,len)
+                        };
+                    }
+                    socket.send(JSON.stringify(message));
+                }
+                confirmname=message.name;
+                confirmcontent=message.content;
+                file.value="";
+            };
+            reader.readAsDataURL(file.files[0]);
         }
         if(photo.value!=""){
             let reader=new FileReader();
-            let photos=new ArrayBuffer();
+            let object=new ArrayBuffer();
             reader.onload=e=>{
-                photos=e.target.result;
-                let len=photos.length;
+                object=e.target.result;
+                let len=object.length;
                 let message={};
                 for(let a=0;a<len+10000;a+=10000){
                     if(a<len){
@@ -157,7 +218,7 @@ function send(){
                             "type":"photo",
                             "name":appellation,
                             "finish":"false",
-                            "content":photos.substring(a,a+10000)
+                            "content":object.substring(a,a+10000)
                         };
                     }
                     else if(a==len){
@@ -165,7 +226,7 @@ function send(){
                             "type":"photo",
                             "name":appellation,
                             "finish":"true",
-                            "content":photos.substring(a,a+10000)
+                            "content":object.substring(a,a+10000)
                         };
                     }
                     else if(a>len){
@@ -173,7 +234,7 @@ function send(){
                             "type":"photo",
                             "name":appellation,
                             "finish":"true",
-                            "content":photos.substring(a,len)
+                            "content":object.substring(a,len)
                         };
                     }
                     socket.send(JSON.stringify(message));

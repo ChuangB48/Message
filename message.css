@@ -374,6 +374,9 @@ body:hover{
     max-width: 20vw;
     height: auto;
 }
+.download{
+    width: 20vw;
+}
 .time{
     position: relative;
 }
