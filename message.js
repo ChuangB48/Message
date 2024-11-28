@@ -60,7 +60,7 @@ socket.onmessage=event=>{
                 confirmcontent="";
             }
             else{
-                document.getElementById("board").innerHTML+="<div class='otherzone'><br><br></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><img src='"+photosrc+"' class='photo'><br><br></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
                 let i=document.getElementById("board");
                 let h=i.scrollHeight;
                 if(i.scrollTop+h>=i.scrollHeight){
@@ -102,13 +102,13 @@ socket.onmessage=event=>{
             filesrc+=word.content;
             let call=word.name;
             if(confirmname==word.name&&confirmcontent==word.content){
-                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><a href='"+filesrc+"' class='down' download><img src='download.png' class='download'></a></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='myzone'><span class='name'>"+call+"</span><br><div class='message'><br><a href='"+filesrc+"' class='down' download><img src='mydownload.png' class='download'></a><br></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
                 down();
                 confirmname="";
                 confirmcontent="";
             }
             else{
-                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><a href='"+filesrc+"' class='down' download><img src='download.png' class='download'></a></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
+                document.getElementById("board").innerHTML+="<div class='otherzone'><span class='name'>"+call+"</span><br><div class='message'><br><a href='"+filesrc+"' class='down' download><img src='otherdownload.png' class='download'></a><br></div><div class='time'><span class='year'>"+year+"</span><span>-</span><span class='month'>"+month+"</span><span>/</span><span class='date'>"+date+"</span><br><span class='hour'>"+hour+"</span><span>:</sapn><span class='minute'>"+minute+"</span></div><br><br></div>";
                 let i=document.getElementById("board");
                 let h=i.scrollHeight;
                 if(i.scrollTop+h>=i.scrollHeight){
@@ -121,130 +121,7 @@ socket.onmessage=event=>{
 }
 function send(){
     let type=document.getElementById("type");
-    let photo=document.getElementById("photo");
-    let video=document.getElementById("video");
-    let file=document.getElementById("file");
-    if(type.value.trim()!=""||photo.value!=""||video.value!=""||file.value!=""){
-        if(video.value!=""){
-            let reader=new FileReader();
-            let object=new ArrayBuffer();
-            reader.onload=e=>{
-                object=e.target.result;
-                let len=object.length;
-                let message={};
-                for(let a=0;a<len+10000;a+=10000){
-                    if(a<len){
-                        message={
-                            "type":"video",
-                            "name":appellation,
-                            "finish":"false",
-                            "content":object.substring(a,a+10000)
-                        };
-                    }
-                    else if(a==len){
-                        message={
-                            "type":"video",
-                            "name":appellation,
-                            "finish":"true",
-                            "content":object.substring(a,a+10000)
-                        };
-                    }
-                    else if(a>len){
-                        message={
-                            "type":"video",
-                            "name":appellation,
-                            "finish":"true",
-                            "content":object.substring(a,len)
-                        };
-                    }
-                    socket.send(JSON.stringify(message));
-                }
-                confirmname=message.name;
-                confirmcontent=message.content;
-                video.value="";
-            };
-            reader.readAsDataURL(video.files[0]);
-        }
-        if(file.value!=""){
-            let reader=new FileReader();
-            let object=new ArrayBuffer();
-            reader.onload=e=>{
-                object=e.target.result;
-                let len=object.length;
-                let message={};
-                for(let a=0;a<len+10000;a+=10000){
-                    if(a<len){
-                        message={
-                            "type":"file",
-                            "name":appellation,
-                            "finish":"false",
-                            "content":object.substring(a,a+10000)
-                        };
-                    }
-                    else if(a==len){
-                        message={
-                            "type":"file",
-                            "name":appellation,
-                            "finish":"true",
-                            "content":object.substring(a,a+10000)
-                        };
-                    }
-                    else if(a>len){
-                        message={
-                            "type":"file",
-                            "name":appellation,
-                            "finish":"true",
-                            "content":object.substring(a,len)
-                        };
-                    }
-                    socket.send(JSON.stringify(message));
-                }
-                confirmname=message.name;
-                confirmcontent=message.content;
-                file.value="";
-            };
-            reader.readAsDataURL(file.files[0]);
-        }
-        if(photo.value!=""){
-            let reader=new FileReader();
-            let object=new ArrayBuffer();
-            reader.onload=e=>{
-                object=e.target.result;
-                let len=object.length;
-                let message={};
-                for(let a=0;a<len+10000;a+=10000){
-                    if(a<len){
-                        message={
-                            "type":"photo",
-                            "name":appellation,
-                            "finish":"false",
-                            "content":object.substring(a,a+10000)
-                        };
-                    }
-                    else if(a==len){
-                        message={
-                            "type":"photo",
-                            "name":appellation,
-                            "finish":"true",
-                            "content":object.substring(a,a+10000)
-                        };
-                    }
-                    else if(a>len){
-                        message={
-                            "type":"photo",
-                            "name":appellation,
-                            "finish":"true",
-                            "content":object.substring(a,len)
-                        };
-                    }
-                    socket.send(JSON.stringify(message));
-                }
-                confirmname=message.name;
-                confirmcontent=message.content;
-                photo.value="";
-            };
-            reader.readAsDataURL(photo.files[0]);
-        }
+    if(type.value.trim()!=""){
         if(type.value!=""){
             let message={
                 "type":"text",
@@ -256,6 +133,131 @@ function send(){
             confirmcontent=message.content;
             type.value="";
         }
+    }
+}
+function sendfile(){
+    let photo=document.getElementById("photo");
+    let video=document.getElementById("video");
+    let file=document.getElementById("file");
+    if(video.value!=""){
+        let reader=new FileReader();
+        let object=new ArrayBuffer();
+        reader.onload=e=>{
+            object=e.target.result;
+            let len=object.length;
+            let message={};
+            for(let a=0;a<len+10000;a+=10000){
+                if(a<len){
+                    message={
+                        "type":"video",
+                        "name":appellation,
+                        "finish":"false",
+                        "content":object.substring(a,a+10000)
+                    };
+                }
+                else if(a==len){
+                    message={
+                        "type":"video",
+                        "name":appellation,
+                        "finish":"true",
+                        "content":object.substring(a,a+10000)
+                    };
+                }
+                else if(a>len){
+                    message={
+                        "type":"video",
+                        "name":appellation,
+                        "finish":"true",
+                        "content":object.substring(a,len)
+                    };
+                }
+                socket.send(JSON.stringify(message));
+            }
+            confirmname=message.name;
+            confirmcontent=message.content;
+            video.value="";
+        };
+        reader.readAsDataURL(video.files[0]);
+    }
+    if(file.value!=""){
+        let reader=new FileReader();
+        let object=new ArrayBuffer();
+        reader.onload=e=>{
+            object=e.target.result;
+            let len=object.length;
+            let message={};
+            for(let a=0;a<len+10000;a+=10000){
+                if(a<len){
+                    message={
+                        "type":"file",
+                        "name":appellation,
+                        "finish":"false",
+                        "content":object.substring(a,a+10000)
+                    };
+                }
+                else if(a==len){
+                    message={
+                        "type":"file",
+                        "name":appellation,
+                        "finish":"true",
+                        "content":object.substring(a,a+10000)
+                    };
+                }
+                else if(a>len){
+                    message={
+                        "type":"file",
+                        "name":appellation,
+                        "finish":"true",
+                        "content":object.substring(a,len)
+                    };
+                }
+                socket.send(JSON.stringify(message));
+            }
+            confirmname=message.name;
+            confirmcontent=message.content;
+            file.value="";
+        };
+        reader.readAsDataURL(file.files[0]);
+    }
+    if(photo.value!=""){
+        let reader=new FileReader();
+        let object=new ArrayBuffer();
+        reader.onload=e=>{
+            object=e.target.result;
+            let len=object.length;
+            let message={};
+            for(let a=0;a<len+10000;a+=10000){
+                if(a<len){
+                    message={
+                        "type":"photo",
+                        "name":appellation,
+                        "finish":"false",
+                        "content":object.substring(a,a+10000)
+                    };
+                }
+                else if(a==len){
+                    message={
+                        "type":"photo",
+                        "name":appellation,
+                        "finish":"true",
+                        "content":object.substring(a,a+10000)
+                    };
+                }
+                else if(a>len){
+                    message={
+                        "type":"photo",
+                        "name":appellation,
+                        "finish":"true",
+                        "content":object.substring(a,len)
+                    };
+                }
+                socket.send(JSON.stringify(message));
+            }
+            confirmname=message.name;
+            confirmcontent=message.content;
+            photo.value="";
+        };
+        reader.readAsDataURL(photo.files[0]);
     }
 }
 function delet(){
@@ -314,5 +316,6 @@ document.getElementById("type").addEventListener("blur",()=>{
     typefocus=false;
 });
 function light(){
+    sendfile();
     document.getElementById("type").focus();
 }
