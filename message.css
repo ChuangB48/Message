@@ -377,8 +377,12 @@ body:hover{
 .download{
     width: 5vw;
 }
+.down{
+    display: block;
+}
 .time{
     position: relative;
+    z-index: -1;
 }
 .time span{
     font-size: 1vw;
