@@ -26,6 +26,7 @@ span{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    -webkit-user-drag: none;
     opacity: 0;
 }
 #empty{
@@ -93,6 +94,7 @@ span{
     left: 9vw;
     width: 4vh;
     height: 2vh;
+    -webkit-user-drag: none;
     transition: all 300ms ease;
 }
 #start{
