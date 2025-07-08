@@ -3,6 +3,7 @@ body{
     width: 100vw;
     height: 100vh;
     background: radial-gradient(ellipse 90% 110%, #ebe5d9, #babce3);
+    user-select: none;
 }
 body:hover{
     cursor: default;
@@ -370,6 +371,8 @@ body:hover{
 }
 .words{
     font-size: 2vw;
+    cursor: text !important;
+    user-select: text !important;
 }
 .photo{
     max-width: 20vw;
