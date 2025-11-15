@@ -260,14 +260,6 @@ function sendfile(){
         reader.readAsDataURL(photo.files[0]);
     }
 }
-function delet(){
-    let photo=document.getElementById("photo");
-    let video=document.getElementById("video");
-    let file=document.getElementById("file");
-    photo.value="";
-    video.value="";
-    file.value="";
-}
 window.addEventListener("keypress",press=>{
     if(press.key=="Enter"){
         send();
