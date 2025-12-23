@@ -122,6 +122,12 @@ body:hover{
 #send:active{
     box-shadow: 0px 0px 15px 1px #632A7E inset;
 }
+#sendspan{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transeform: transelate(-50%,-50%);
+}
 #detector{
     position: absolute;
     top: 88vh;
