@@ -126,7 +126,7 @@ body:hover{
     position: absolute;
     left: 50%;
     top: 50%;
-    transeform: transelate(-50%,-50%);
+    transform: transelate(-50%,-50%);
 }
 #detector{
     position: absolute;
