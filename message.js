@@ -266,7 +266,7 @@ window.addEventListener("keypress",press=>{
     }
 },false);
 window.setInterval(()=>{
-    socket.send("{\"type\"=\"fix\"}");
+    socket.send("{\"type\":\"fix\"}");
 },1000);
 window.addEventListener("click",mouse=>{
     let mousey=mouse.clientX-25;
